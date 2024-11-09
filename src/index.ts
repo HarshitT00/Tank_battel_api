@@ -3,25 +3,10 @@ import { WebSocketServer, RawData } from 'ws'; // Import WebSocketServer and Raw
 import type { WebSocket } from 'ws'; // Import WebSocket as a type only
 import url from 'url';
 import { v4 as uuidv4 } from 'uuid';
+import { Room, UserState } from './types/game.types';
 
 const server = http.createServer();
 const wsServer = new WebSocketServer({ server });
-
-interface UserState {
-  x: number;
-  y: number;
-}
-
-interface User {
-  username: string;
-  state: UserState;
-}
-
-interface Room {
-  id: string;
-  users: Record<string, User>;
-  connections: Record<string, WebSocket>;
-}
 
 const rooms: Record<string, Room> = {};
 
