@@ -11,7 +11,6 @@ export interface User {
 }
 
 export interface Room {
-    [x: string]: any;
     id: string;
     users: Record<string, User>;
     connections: Record<string, WebSocket>;

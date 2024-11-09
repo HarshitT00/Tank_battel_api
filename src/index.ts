@@ -4,6 +4,7 @@ import type { WebSocket } from 'ws'; // Import WebSocket as a type only
 import url from 'url';
 import { v4 as uuidv4 } from 'uuid';
 import { Room, UserState } from './types/game.types';
+import { RoomManagerService } from './game-connections/game-connection';
 
 const server = http.createServer();
 const wsServer = new WebSocketServer({ server });
@@ -73,7 +74,7 @@ const handleConnection = (connection: WebSocket, request: IncomingMessage) => {
   connection.on('close', () => handleClose(uuid, roomId));
 };
 
-wsServer.on('connection', handleConnection);
+wsServer.on('connection', RoomManagerService.handleConnection);
 
 const port = 8000;
 server.listen(port, () => {
