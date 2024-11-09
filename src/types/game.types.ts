@@ -2,7 +2,7 @@ import type { WebSocket } from 'ws';
 
 export interface UserState {
     playerTurn: number;
-    playArea: PlayArea;
+    playArea?: PlayArea;
     toKill: boolean;
 }
 
@@ -18,8 +18,8 @@ export interface Room {
 }
 
 export interface PlayArea {
-    grid: number[][],
-
+    grid: number[][];
+    playerpos: PlayerPos;
 }
 
 export interface PlayerPos {

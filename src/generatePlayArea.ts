@@ -1,4 +1,4 @@
-import { PlayArea } from "./types/game.types";
+import { PlayArea, PlayerPos } from "./types/game.types";
 
 const NUMBER_OF_ROWS = 16;
 const NUMBER_OF_COLS = 16;
@@ -67,15 +67,16 @@ export const generatePlayArea = (numberOfTanks : number): PlayArea => {
 
     // get player tank pos
 
-    const playerPos = {
+    const playerPos: PlayerPos = {
         playerAPos: generateRandomPointsInHalf(NUMBER_OF_ROWS, NUMBER_OF_COLS, numberOfTanks, true ),
-        palyerBPos: generateRandomPointsInHalf(NUMBER_OF_ROWS , NUMBER_OF_COLS , numberOfTanks, false )
+        playerBPos: generateRandomPointsInHalf(NUMBER_OF_ROWS , NUMBER_OF_COLS , numberOfTanks, false )
     }
 
+    // update grid todo:
 
-    const playArea = {
+    const playArea: PlayArea = {
         grid: grid, 
-        PlayerPos: playerPos
+        playerpos: playerPos
     }
 
     return playArea

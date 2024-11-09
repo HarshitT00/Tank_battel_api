@@ -63,12 +63,14 @@ const handleConnection = (connection: WebSocket, request: IncomingMessage) => {
 
   room.connections[uuid] = connection;
   room.users[uuid] = {
-    username,
+    username: username,
     state: {
-      x: 0,
-      y: 0
+      toKill: false,
+      playerTurn: 1
+      
+
     }
-  };
+  }
 
   connection.on('message', (message: RawData) => handleMessage(message, uuid, roomId));
   connection.on('close', () => handleClose(uuid, roomId));

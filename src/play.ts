@@ -31,7 +31,7 @@ const intilizeGameState = (room : Room , playArea : PlayArea, ) =>{
                 playerTurn: 1,
                 toKill: false
             }
-
+            room.users[uuid].state = userState
             const message = JSON.stringify(userState)
 
             console.log(`gameState updated for user: ${room.users[uuid].username} with new state : ${room.users[uuid].state}`)
@@ -121,7 +121,9 @@ const handleMessage = (message : RawData , room : Room  ) => {
         (uuid) => {
             // catch and throw error 
             try {
+                
                 playTurn(userState ,room, uuid)
+                
             }
             catch(err) {
                 room.connections[uuid].on(
@@ -151,12 +153,17 @@ export const startGame = ( room : Room) => {
 
 
     // handle the messages sent from user to us 
-
-    
+    Object.keys(room.connections).forEach(
+        (uuid) =>{
+            console.log(uuid);
+        }
+    )
 
     const playArea = generatePlayArea( NUMBER_OF_TANKS )
 
     // send message to players game has started 
+
+
 
     intilizeGameState(room , playArea)
 
