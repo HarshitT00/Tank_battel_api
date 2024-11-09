@@ -3,6 +3,7 @@ import { Room } from "../types/game.types";
 import type { WebSocket } from 'ws';
 import url from 'url';
 import { v4 as uuidv4 } from 'uuid';
+import { startGame } from "../play";
 
 export class RoomManager {
     private rooms: Record<string, Room>;
@@ -44,12 +45,11 @@ export class RoomManager {
         // Validate username
         if (!username) {
             connection.close(1002, 'Username is required');
-
             return;
         }
 
         const roomId = this.getRoomId(newRoom, query.roomId as string | undefined);
-
+        console.log(roomId)
         if(!(roomId in this.rooms)){
             connection.close(1002, 'Something went wrong');
 
@@ -61,10 +61,8 @@ export class RoomManager {
     
         // Add user to room
         room.connections[uuid] = connection;
-        room.users[uuid] = {
-            username,
-            state: { x: 0, y: 0 }
-        };
+
+        startGame(room)
     
         console.log(`Username: ${username} ${newRoom ? 'created' : 'joined'} room ${roomId}`);
         console.log(`UUID: ${uuid}`);
