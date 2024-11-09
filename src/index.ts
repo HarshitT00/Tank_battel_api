@@ -67,8 +67,6 @@ const handleConnection = (connection: WebSocket, request: IncomingMessage) => {
     state: {
       toKill: false,
       playerTurn: 1
-      
-
     }
   }
 

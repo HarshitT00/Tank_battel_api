@@ -1,9 +1,9 @@
 import { PlayArea, PlayerPos } from "./types/game.types";
 
-const NUMBER_OF_ROWS = 16;
-const NUMBER_OF_COLS = 16;
+const NUMBER_OF_ROWS = 6;
+const NUMBER_OF_COLS = 6;
 
-const NUMBER_OF_OBSTRUCTIONS = 50;
+const NUMBER_OF_OBSTRUCTIONS = 2;
 
 
 const generateGrid = (rows : number , cols : number ): number[][] => {
