@@ -1,8 +1,9 @@
 import type { WebSocket } from 'ws';
 
 export interface UserState {
-    x: number;
-    y: number;
+    playerTurn: number;
+    playArea: PlayArea;
+    toKill: boolean;
 }
 
 export interface User {
@@ -16,3 +17,14 @@ export interface Room {
     users: Record<string, User>;
     connections: Record<string, WebSocket>;
 }
+
+export interface PlayArea {
+    grid: number[][],
+
+}
+
+export interface PlayerPos {
+    playerAPos: [number, number][]
+    playerBPos: [number, number][]
+}
+
