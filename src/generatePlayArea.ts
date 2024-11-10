@@ -1,9 +1,10 @@
+import { validate } from "uuid";
 import { PlayArea, PlayerPos } from "./types/game.types";
 
-const NUMBER_OF_ROWS = 16;
-const NUMBER_OF_COLS = 16;
+const NUMBER_OF_ROWS = 6;
+const NUMBER_OF_COLS = 6;
 
-const NUMBER_OF_OBSTRUCTIONS = 50;
+const NUMBER_OF_OBSTRUCTIONS = 2;
 
 
 const generateGrid = (rows : number , cols : number ): number[][] => {
@@ -52,7 +53,7 @@ const generateRandomPointsInHalf = ( rows: number, cols: number, n: number, left
     return result;
 }
 
-export const generatePlayArea = (numberOfTanks : number): PlayArea => {
+const generateRandomPlayArea = (numberOfTanks : number): PlayArea => {
 
     let grid = generateGrid( NUMBER_OF_ROWS , NUMBER_OF_COLS )
 
@@ -73,6 +74,18 @@ export const generatePlayArea = (numberOfTanks : number): PlayArea => {
     }
 
     // update grid todo:
+    playerPos.playerAPos.forEach(
+        ([row, col]) =>{
+            grid[row][col] = 1
+        }
+    )
+
+    // update B pos 
+    playerPos.playerBPos.forEach(
+        ([row, col]) => {
+            grid[row][col] = 1
+        }
+    )
 
     const playArea: PlayArea = {
         grid: grid, 
@@ -81,4 +94,18 @@ export const generatePlayArea = (numberOfTanks : number): PlayArea => {
 
     return playArea
 
+}
+const validPlayArea = (playArea : PlayArea): boolean => {
+    //TODO: write some validations 
+    return true
+}
+
+export const generatePlayArea = (numberOfTanks : number): PlayArea => {
+
+    let playArea = generateRandomPlayArea(numberOfTanks)
+
+    while(!validPlayArea(playArea)) {
+        playArea = generateRandomPlayArea(numberOfTanks)
+    }
+    return playArea
 }

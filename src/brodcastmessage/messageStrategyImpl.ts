@@ -1,10 +1,11 @@
 import { MessageStategy } from "./messageStrategy";
 
 export class GameStartMessage implements MessageStategy {
-    toUser(username: string): string {
-        return `Game has started ${username}`
-    }
-    message(): string {
-        return "Game is starting "
+    
+    message(username?: string): string {
+        if(username){
+            return `Hi , ${username} the Game has started `
+        }
+        return `Game has Started`
     }
 }

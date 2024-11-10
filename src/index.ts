@@ -1,6 +1,6 @@
 import http, { IncomingMessage } from 'http';
 import { WebSocketServer, RawData } from 'ws'; // Import WebSocketServer and RawData
-import type { WebSocket } from 'ws'; // Import WebSocket as a type only
+import { WebSocket } from 'ws'; // Import WebSocket as a type only
 import url from 'url';
 import { v4 as uuidv4 } from 'uuid';
 import { Room, UserState } from './types/game.types';
@@ -20,6 +20,8 @@ const broadcastToRoom = (roomId: string) => {
     }
   });
 };
+
+
 
 const handleMessage = (bytes: RawData, uuid: string, roomId: string) => {
   const message = JSON.parse(bytes.toString()) as UserState;
@@ -67,8 +69,6 @@ const handleConnection = (connection: WebSocket, request: IncomingMessage) => {
     state: {
       toKill: false,
       playerTurn: 1
-      
-
     }
   }
 

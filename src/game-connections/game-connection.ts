@@ -61,8 +61,17 @@ export class RoomManager {
     
         // Add user to room
         room.connections[uuid] = connection;
+        room.users[uuid] = {
+            username: username,
+            state: {
+              toKill: false,
+              playerTurn: 1
+            }
+          }
 
-        startGame(room)
+        if(Object.keys(room.users).length === 2 ){
+                startGame(room)
+        }
     
         console.log(`Username: ${username} ${newRoom ? 'created' : 'joined'} room ${roomId}`);
         console.log(`UUID: ${uuid}`);
